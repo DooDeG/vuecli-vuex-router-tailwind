@@ -1,12 +1,10 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/menu">menu</router-link>
-    </div>
-    <!-- <router-view/> -->
-    <indexpage msg="Welcome to Your Vue.js App"/>
+  <div id="order">
+    <div class="flex justify-center bg-gray-200">
+  <div class="text-gray-700 text-center bg-gray-400 px-4 py-2 m-2">order</div>
+  <div class="text-gray-700 text-center bg-gray-400 px-4 py-2 m-2">2</div>
+  <div class="text-gray-700 text-center bg-gray-400 px-4 py-2 m-2">3</div>
+</div>
 
   </div>
 </template>
@@ -14,16 +12,12 @@
 <script>
 import axios from "axios";
 // @ is an alias to /src
-import indexpage from './views/Index/index.vue'
 export default {
-  name: 'Home',
+  name: 'order',
   data() {
     return {
       usersList: []
     };
-  },
-  components: {
-    indexpage
   },
    mounted() {
     axios.get("https://jsonplaceholder.typicode.com/users")
