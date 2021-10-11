@@ -3,18 +3,18 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
-      <router-link to="/menu">menu</router-link>
+      <router-link to="/mains">menu</router-link>
     </div>
     <!-- <router-view/> -->
-    <indexpage msg="Welcome to Your Vue.js App"/>
-
+    <!-- <indexpage msg="Welcome to Your Vue.js App"/> -->
+    <router-view />
   </div>
 </template>
 
 <script>
 import axios from "axios";
 // @ is an alias to /src
-import indexpage from './views/Index/index.vue'
+// import indexpage from './views/Index/index.vue'
 export default {
   name: 'Home',
   data() {
@@ -23,7 +23,7 @@ export default {
     };
   },
   components: {
-    indexpage
+    // indexpage
   },
    mounted() {
     axios.get("https://jsonplaceholder.typicode.com/users")

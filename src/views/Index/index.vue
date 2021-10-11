@@ -19,7 +19,7 @@
                 <nav class="mt-10">
                     
                         <!-- <router-link to="/menu">menu</router-link> -->
-                    <router-link to="/menu" class=" hover:text-blue active:border-r-4 active:border-gray-700">
+                    <router-link to="/mains/menu" class=" hover:text-blue active:border-r-4 active:border-gray-700">
                         <a class="flex items-center mt-4 py-2 px-6 bg-gray-700 bg-opacity-25 text-gray-100" href="/">
                             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
@@ -31,7 +31,7 @@
                             <span class="mx-3">Menu</span>
                         </a>
                     </router-link>
-                    <router-link to="/order" class=" hover:text-blue active:border-r-4 active:border-gray-700">
+                    <router-link to="/mains/order" class=" hover:text-blue active:border-r-4 active:border-gray-700">
                         <a class="flex items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                             >
                             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -44,7 +44,7 @@
                             <span class="mx-3">order</span>
                         </a>
                     </router-link>
-                    <router-link  to="/analysis" class=" hover:text-blue active:border-r-4 active:border-gray-700">
+                    <router-link  to="/mains/analysis" class=" hover:text-blue active:border-r-4 active:border-gray-700">
                     <a class="flex items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                         >
                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -58,7 +58,7 @@
                     </a>
         
                     </router-link>
-                    <router-link to="/brand" class=" hover:text-blue active:border-r-4 active:border-gray-700">
+                    <router-link to="/mains/brand" class=" hover:text-blue active:border-r-4 active:border-gray-700">
                     <a class="flex items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                         >
                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -71,7 +71,7 @@
                         <span class="mx-3">brand</span>
                     </a>
                     </router-link>
-                    <router-link to="/printer" class=" hover:text-blue active:border-r-4 active:border-gray-700">
+                    <router-link to="/mains/printer" class=" hover:text-blue active:border-r-4 active:border-gray-700">
                     <a class="flex items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                         >
                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -84,7 +84,7 @@
                         <span class="mx-3">printer</span>
                     </a>
                     </router-link>
-                    <router-link to="/bdorder" class=" hover:text-blue active:border-r-4 active:border-gray-700">
+                    <router-link to="/mains/bdorder" class=" hover:text-blue active:border-r-4 active:border-gray-700">
                     <a class="flex items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                         >
                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -100,7 +100,7 @@
                 </nav>
             </div>
             
-            <div class="w-11/12">
+            <div class="lg:w-11/12 w-full">
                 <transition name="fade" mode="out-in">
                     <router-view />
                 </transition>
@@ -113,7 +113,7 @@
 import axios from "axios";
 
 export default {
-  name: 'Home',
+  name: 'Index',
   data() {
     return {
       usersList: []

@@ -9,6 +9,7 @@
         {{ user.website }}
       </li>
     </ul>
+    
   </div>
 </template>
 

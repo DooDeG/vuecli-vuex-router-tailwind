@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import login from '../views/Auth/login.vue'
-// import index from '../views/Index/index.vue'
+import index from '../views/Index/index.vue'
 import analysis from '../views/Mains/Analysis/analysis.vue'
 import bdorder from '../views/Mains/BackendOrder/bdorder.vue'
 import brand from '../views/Mains/Brands/brand.vue'
@@ -36,49 +36,49 @@ const routes = [
   //   name: 'index',
   //   component: index
   // },
-  {
-    path: '/menu',
-    name: 'menu',
-    component: menu
-  },
-  {
-    path: '/order',
-    name: 'order',
-    component: order
-  },
-  {
-    path: '/analysis',
-    name: 'analysis',
-    component: analysis
-  },
-  {
-    path: '/brand',
-    name: 'brand',
-    component: brand
-  },
-  {
-    path: '/printer',
-    name: 'printer',
-    component: printer
-  },
-  {
-    path: '/bdorder',
-    name: 'bdorder',
-    component: bdorder
-  },
-//   { path: '/mains',
-//   name: 'mains',
-//   component: index,
-//   children: [
-//         { path: '', redirect: { name: 'menu' } },
-//         { path: 'menu', name: 'menu', component: menu },
-//         { path: 'order', name: 'order', component: order },
-//         { path: 'analysis', name: 'analysis', component: analysis },
-//         { path: 'brand', name: 'brand', component: brand },
-//         { path: 'printer', name: 'printer', component: printer },
-//         { path: 'bdorder', name: 'bdorder', component: bdorder },
+  // {
+  //   path: '/menu',
+  //   name: 'menu',
+  //   component: menu
+  // },
+  // {
+  //   path: '/order',
+  //   name: 'order',
+  //   component: order
+  // },
+  // {
+  //   path: '/analysis',
+  //   name: 'analysis',
+  //   component: analysis
+  // },
+  // {
+  //   path: '/brand',
+  //   name: 'brand',
+  //   component: brand
+  // },
+  // {
+  //   path: '/printer',
+  //   name: 'printer',
+  //   component: printer
+  // },
+  // {
+  //   path: '/bdorder',
+  //   name: 'bdorder',
+  //   component: bdorder
+  // },
+  { path: '/mains',
+  name: 'mains',
+  component: index,
+  children: [
+        { path: '', redirect: { name: 'menu' } },
+        { path: '/mains/menu', name: 'menu', component: menu },
+        { path: '/mains/order', name: 'order', component: order },
+        { path: '/mains/analysis', name: 'analysis', component: analysis },
+        { path: '/mains/brand', name: 'brand', component: brand },
+        { path: '/mains/printer', name: 'printer', component: printer },
+        { path: '/mains/bdorder', name: 'bdorder', component: bdorder },
 
-// ] },
+] },
 ]
 
 const router = new VueRouter({
