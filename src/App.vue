@@ -1,6 +1,8 @@
 <template>
   <div id="app">
     <div>{{ VUE_APP_URL }}</div>
+    <div>{{ k }}</div>
+    <div></div>
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
@@ -21,6 +23,7 @@ export default {
   data() {
     return {
       usersList: [],
+      k : this.$baseUrl+'user/token',
       VUE_APP_URL:process.env.VUE_APP_URL
     };
   },
