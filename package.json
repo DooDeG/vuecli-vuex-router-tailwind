@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": " vue-cli-service serve",
     "build": "vue-cli-service build",
+    "dev": "vue-cli-service build --mode development", 
+    "build:prod": "vue-cli-service build --mode production",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -24,6 +26,7 @@
     "@vue/cli-plugin-router": "^4.5.13",
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
+    "cross-env": "^7.0.3",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "vue-cli-plugin-tailwind": "~2.0.6",

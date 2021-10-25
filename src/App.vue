@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <div>{{ VUE_APP_URL }}</div>
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
@@ -19,7 +20,8 @@ export default {
   name: 'Home',
   data() {
     return {
-      usersList: []
+      usersList: [],
+      VUE_APP_URL:process.env.VUE_APP_URL
     };
   },
   components: {
