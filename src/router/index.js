@@ -30,36 +30,47 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   { path: '/mains',
-  name: 'mains',
-  component: index,
-  children: [
-        { path: '', redirect: { name: 'menu' } },
-        { path: '/mains/menu', name: 'menu', component: menu },
-        { path: '/mains/order', name: 'order', component: order },
-        { path: '/mains/analysis', name: 'analysis', component: analysis },
-        { path: '/mains/brand', name: 'brand', component: brand },
-        { path: '/mains/printer', name: 'printer', component: printer },
-        { path: '/mains/bdorder', name: 'bdorder', component: bdorder },
+    name: 'mains',
+    component: index,
+    children: [
+      { path: '', redirect: { name: 'menu' } },
+      { path: '/mains/menu', name: 'menu', component: menu },
+      { path: '/mains/order', name: 'order', component: order },
+      { path: '/mains/analysis', name: 'analysis', component: analysis },
+      { path: '/mains/brand', name: 'brand', component: brand },
+      { path: '/mains/printer', name: 'printer', component: printer },
+      { path: '/mains/bdorder', name: 'bdorder', component: bdorder },
 
-] },
+    ] 
+  },
 ]
 
-
+let EXPIRESTIME = 86400000
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
 })
+
 router.beforeEach((to, from, next) => {
-  if (to.path === '/login') {
+  if (to.path === '/') {
     next();
   } else {
     let token = localStorage.getItem('Authorization');
- 
-    if (token === 'null' || token === '') {
-      next('/login');
-    } else {
+    try {
+      token = JSON.parse(token);
+    } catch (error) {
+        // eslint-disable-next-line no-self-assign
+        token = token;
+    }
+    let date = new Date().getTime();
+    if (token === null || token === '') {
+      next('/');
+    } if (date - token.startTime > EXPIRESTIME) {
+      localStorage.removeItem('token');
+      next('/');
+    }else {
       next();
     }
   }

@@ -78,13 +78,15 @@
                         console.log(res.data);
                         
                         this.changeLogin({Authorization: res.data.token });
-                        this.$router.push('/about');
+                        
+                        this.$router.push('mains');
+                        alert('登陆成功');
                     })
                     .catch(function (error) {
                         console.log(error);
                     });
                 }
-            }
+            },
         }
     }
 </script>
