@@ -7,6 +7,7 @@ import analysis from '../views/Mains/Analysis/analysis.vue'
 import bdorder from '../views/Mains/BackendOrder/bdorder.vue'
 import brand from '../views/Mains/Brands/brand.vue'
 import menu from '../views/Mains/Menus/menu.vue'
+import menuadd from '../views/Mains/Menus/add.vue'
 import order from '../views/Mains/Orders/order.vue'
 import printer from '../views/Mains/prints/printer.vue'
 
@@ -35,6 +36,7 @@ const routes = [
     children: [
       { path: '', redirect: { name: 'menu' } },
       { path: '/mains/menu', name: 'menu', component: menu },
+      { path: '/mains/menu/add', name: 'menuadd', component: menuadd },
       { path: '/mains/order', name: 'order', component: order },
       { path: '/mains/analysis', name: 'analysis', component: analysis },
       { path: '/mains/brand', name: 'brand', component: brand },
@@ -45,7 +47,7 @@ const routes = [
   },
 ]
 
-let EXPIRESTIME = 86400000
+// let EXPIRESTIME = 86400000
 
 const router = new VueRouter({
   mode: 'history',
@@ -53,26 +55,26 @@ const router = new VueRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
-  if (to.path === '/') {
-    next();
-  } else {
-    let token = localStorage.getItem('Authorization');
-    try {
-      token = JSON.parse(token);
-    } catch (error) {
-        // eslint-disable-next-line no-self-assign
-        token = token;
-    }
-    let date = new Date().getTime();
-    if (token === null || token === '') {
-      next('/');
-    } if (date - token.startTime > EXPIRESTIME) {
-      localStorage.removeItem('token');
-      next('/');
-    }else {
-      next();
-    }
-  }
-});
+// router.beforeEach((to, from, next) => {
+//   if (to.path === '/') {
+//     next();
+//   } else {
+//     let token = localStorage.getItem('Authorization');
+//     try {
+//       token = JSON.parse(token);
+//     } catch (error) {
+//         // eslint-disable-next-line no-self-assign
+//         token = token;
+//     }
+//     let date = new Date().getTime();
+//     if (token === null || token === '') {
+//       next('/');
+//     } if (date - token.startTime > EXPIRESTIME) {
+//       localStorage.removeItem('token');
+//       next('/');
+//     }else {
+//       next();
+//     }
+//   }
+// });
 export default router
