@@ -137,17 +137,18 @@
 
                                         <span class="ml-2">Download</span>
                                     </button>
+                                    <router-link to="/mains/menu/add">
+                                        <button 
+                                            type="button" 
+                                            class="px-4 py-3 bg-blue-600 rounded-md text-white outline-none focus:ring-4 shadow-lg transform active:scale-y-75 transition-transform flex"
+                                        >
+                                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                                            </svg>
 
-                                    <button 
-                                        type="button" 
-                                        class="px-4 py-3 bg-blue-600 rounded-md text-white outline-none focus:ring-4 shadow-lg transform active:scale-y-75 transition-transform flex"
-                                    >
-                                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
-                                        </svg>
-
-                                        <span class="ml-2">add</span>
-                                    </button>
+                                            <span class="ml-2">add</span>
+                                        </button>
+                                     </router-link>
                                 </div>
                             </div>
                         </div>

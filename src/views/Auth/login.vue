@@ -76,9 +76,7 @@
                     })
                     .then(res => {
                         console.log(res.data);
-                        
                         this.changeLogin({Authorization: res.data.token });
-                        
                         this.$router.push('mains');
                         alert('登陆成功');
                     })
