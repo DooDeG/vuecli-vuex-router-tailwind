@@ -51,6 +51,9 @@
             password: ""
             };
         },
+        created(){
+            this.logout();
+        },
         components: {
         },
         mounted() {
@@ -66,6 +69,10 @@
         },
         methods:{
             ...mapMutations(['changeLogin']),
+            logout(){
+                localStorage.removeItem('Authorization');
+                this.$router.push('login');
+            },
             login () {
                 if (this.useremail === '' || this.password === '') {
                     alert('賬號或密碼不能為空');

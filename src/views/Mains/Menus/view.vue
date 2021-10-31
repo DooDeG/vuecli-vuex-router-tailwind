@@ -1,7 +1,7 @@
 
 <template>
     <div class="viewMenu">
-        <div class="relative min-h-screen flex items-center justify-center bg-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 bg-gray-500 bg-no-repeat bg-cover relative items-center">
+        <div class="relative flex items-center justify-center bg-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 bg-gray-500 bg-cover relative items-center h-screen">
             <div class="absolute bg-black opacity-60 inset-0 z-0"></div>
             <div class="max-w-md w-full space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
                 <div class="grid  gap-8 grid-cols-1">
@@ -26,17 +26,17 @@
                                 </div>
                                 <div class="md:flex flex-row md:space-x-4 w-full text-xs">
                                     <div class="mb-3 space-y-2 w-full text-xs">
-                                        <label class="font-semibold text-gray-600 py-2">Company  Name <abbr title="required">*</abbr></label>
-                                        <input placeholder="Company Name" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4" required="required" type="text" name="integration[shop_name]" id="integration_shop_name">
+                                        <label class="font-semibold text-gray-600 py-2">Name <abbr title="required">*</abbr></label>
+                                        <input :placeholder="product.name" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4" required="required" type="text" name="integration[shop_name]" id="integration_shop_name">
                                         <p class="text-red text-xs hidden">Please fill out this field.</p>
                                     </div>
                                     <div class="mb-3 space-y-2 w-full text-xs">
-                                        <label class="font-semibold text-gray-600 py-2">Company  Mail <abbr title="required">*</abbr></label>
-                                        <input placeholder="Email ID" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4" required="required" type="text" name="integration[shop_name]" id="integration_shop_name">
+                                        <label class="font-semibold text-gray-600 py-2">price <abbr title="required">*</abbr></label>
+                                        <input :placeholder="product.price" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4" required="required" type="text" name="integration[shop_name]" id="integration_shop_name">
                                         <p class="text-red text-xs hidden">Please fill out this field.</p>
                                     </div>
                                 </div>
-                                <div class="mb-3 space-y-2 w-full text-xs">
+                                <!-- <div class="mb-3 space-y-2 w-full text-xs">
                                     <label class=" font-semibold text-gray-600 py-2">Company  Website</label>
                                     <div class="flex flex-wrap items-stretch w-full mb-4 relative">
                                         <div class="flex">
@@ -48,14 +48,14 @@
                                         </div>
                                         <input type="text" class="flex-shrink flex-grow flex-auto leading-normal w-px flex-1 border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow" placeholder="https://">
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="md:flex md:flex-row md:space-x-4 w-full text-xs">
                                     <div class="w-full flex flex-col mb-3">
-                                        <label class="font-semibold text-gray-600 py-2">Company Address</label>
-                                        <input placeholder="Address" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4" type="text" name="integration[street_address]" id="integration_street_address">
+                                        <label class="font-semibold text-gray-600 py-2">date</label>
+                                        <input :placeholder="product.date" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4" type="text" name="integration[street_address]" id="integration_street_address">
                                     </div>
                                     <div class="w-full flex flex-col mb-3">
-                                        <label class="font-semibold text-gray-600 py-2">Location<abbr title="required">*</abbr></label>
+                                        <label class="font-semibold text-gray-600 py-2">type<abbr title="required">*</abbr></label>
                                         <select class="block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full " required="required" name="integration[city_id]" id="integration_city_id">
                                             <option value="">Seleted location</option>
                                             <option value="">Cochin,KL</option>
@@ -94,7 +94,8 @@ export default {
     name: 'viewMenu',
     data() {
         return {
-        usersList: []
+        usersList: [],
+        product:[]
         };
     },
     components: {
@@ -110,7 +111,31 @@ export default {
             // Manage errors if found any
         })
     },
+    created(){
+        
+        this.getParams();
+        this.getProductId ()
+    },
     methods:{
+        getParams() {
+            console.log(this.$route.params.id);
+            this.slug = this.$route.params.id
+            if(!this.slug || this.slug == null || this.slug == ''){
+                
+                this.$router.push('/mains');
+            }
+        },
+        getProductId () {
+            axios.get(this.$baseUrl+'Product/getProduct/'+this.slug)
+                .then(res => {
+                    console.log(res.data)
+                    this.product = res.data
+                })
+                .catch(error => {
+                    console.log(error)
+                    // Manage errors if found any
+            })
+        },
         cancelButton(){
             alert("data not save");
             // this.$router.push('/');

@@ -181,40 +181,40 @@
                                     </thead>
     
                                     <tbody class="bg-white">
-                                        <tr>
+                                        <tr v-for="item in menu" :key="item.id">
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                 <div class="flex items-center">
                                                     <div class="flex-shrink-0 h-10 w-10">
                                                         <img class="h-10 w-10 rounded-full"
-                                                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80"
-                                                            alt="">
+                                                            :src=item.img
+                                                            alt="img">
                                                     </div>
     
                                                     <div class="ml-4">
-                                                        <div class="text-sm leading-5 font-medium text-gray-900">John Doe
+                                                        <div class="text-sm leading-5 font-medium text-gray-900">{{item.name}}
                                                         </div>
-                                                        <div class="text-sm leading-5 text-gray-500">john@example.com</div>
+                                                        <div class="text-sm leading-5 text-gray-500"></div>
                                                     </div>
                                                 </div>
                                             </td>
     
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                 <div class="flex justify-start">
-                                                    <div class="text-sm leading-5 text-gray-900">Software Engineer</div>
+                                                    <div class="text-sm leading-5 text-gray-900">{{item.price}}</div>
                                                 </div>
                                             </td>
     
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                 <div class="flex justify-start">
                                                 <span
-                                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
+                                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{{item.type}}</span>
                                                 </div>
                                             </td>
     
                                             <td
                                                 class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
                                                     <div class="flex justify-start">
-                                                    Owner
+                                                    {{item.enable}}
                                                     </div>
                                                 </td>
     
@@ -223,10 +223,12 @@
                                                 <a href="#" class="text-indigo-600 hover:text-indigo-900">
                                                     <div class="flex item-center justify-center">
                                                     <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                                        </svg>
+                                                        <router-link :to="{ name:'menuview', params:{id: item.id } }">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                            </svg>
+                                                        </router-link>
                                                     </div>
                                                     <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -259,25 +261,44 @@
 import axios from "axios";
 
 export default {
-  name: 'Home',
-  data() {
-    return {
-      usersList: []
-    };
-  },
-  components: {
-  },
-   mounted() {
-    axios.get("https://jsonplaceholder.typicode.com/users")
-      .then(res => {
-        this.usersList = res.data;
-        console.log(this.usersList)
-      })
-      .catch(error => {
-        console.log(error)
-         // Manage errors if found any
-      })
-  }
+    name: 'Home',
+    data() {
+        return {
+            menu: [],
+            slug:''
+        };
+    },
+    components: {
+    },
+    mounted() {
+        axios.get("https://jsonplaceholder.typicode.com/users")
+        .then(res => {
+            this.usersList = res.data;
+            console.log(this.usersList)
+        })
+        .catch(error => {
+            console.log(error)
+            // Manage errors if found any
+        })
+    },
+    created(){
+        this.getProduct();
+    },
+    methods:{
+        
+        getProduct () {
+            axios.get(this.$baseUrl+'Product/getAll')
+                .then(res => {
+                    res.data.value.products.forEach(item => {
+                        this.menu.push(item) 
+                    });
+                })
+                .catch(error => {
+                    console.log(error)
+                    // Manage errors if found any
+            })
+        }
+    }
 }
 </script>
 
