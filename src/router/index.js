@@ -8,6 +8,7 @@ import bdorder from '../views/Mains/BackendOrder/bdorder.vue'
 import brand from '../views/Mains/Brands/brand.vue'
 import menu from '../views/Mains/Menus/menu.vue'
 import order from '../views/Mains/Orders/order.vue'
+import User from '../views/Mains/UserManagement/index.vue'
 import printer from '../views/Mains/prints/printer.vue'
 
 
@@ -36,6 +37,7 @@ const routes = [
       { path: '', redirect: { name: 'menu' } },
       { path: '/mains/menu', name: 'menu', component: menu },
       { path: '/mains/order', name: 'order', component: order },
+      { path: '/mains/User', name: 'user', component: User },
       { path: '/mains/analysis', name: 'analysis', component: analysis },
       { path: '/mains/brand', name: 'brand', component: brand },
       { path: '/mains/printer', name: 'printer', component: printer },

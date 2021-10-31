@@ -20,7 +20,7 @@
                     
                         <!-- <router-link to="/menu">menu</router-link> -->
                     <router-link to="/mains/menu" class=" hover:text-blue active:border-r-4 active:border-gray-700">
-                        <a class="flex items-center mt-4 py-2 px-6 bg-gray-700 bg-opacity-25 text-gray-100" href="/">
+                        <a class="flex items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -28,7 +28,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
                             </svg>
-                            <span class="mx-3">Menu</span>
+                            <span class="mx-3">菜單</span>
                         </a>
                     </router-link>
                     <router-link to="/mains/order" class=" hover:text-blue active:border-r-4 active:border-gray-700">
@@ -41,7 +41,19 @@
                                 </path>
                             </svg>
             
-                            <span class="mx-3">order</span>
+                            <span class="mx-3">訂單</span>
+                        </a>
+                    </router-link>
+                    <router-link to="/mains/user" class=" hover:text-blue active:border-r-4 active:border-gray-700">
+                        <a class="flex items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+                            </svg>
+                            <span class="mx-3">用戶管理</span>
                         </a>
                     </router-link>
                     <router-link  to="/mains/analysis" class=" hover:text-blue active:border-r-4 active:border-gray-700">
@@ -54,7 +66,7 @@
                             </path>
                         </svg>
         
-                        <span class="mx-3">analysis</span>
+                        <span class="mx-3">分析</span>
                     </a>
         
                     </router-link>
@@ -68,7 +80,7 @@
                             </path>
                         </svg>
         
-                        <span class="mx-3">brand</span>
+                        <span class="mx-3">品牌</span>
                     </a>
                     </router-link>
                     <router-link to="/mains/printer" class=" hover:text-blue active:border-r-4 active:border-gray-700">
@@ -94,7 +106,7 @@
                             </path>
                         </svg>
         
-                        <span class="mx-3">bdorder</span>
+                        <span class="mx-3">後台訂單</span>
                     </a>
                     </router-link>
                     <div @click="loginout">loginout
@@ -143,16 +155,16 @@ export default {
 </script>
 
 <style>
-ul {
-  margin: 0 auto;
-  width: 300px;
-  text-align: left;  
-}
+    ul {
+        margin: 0 auto;
+        width: 300px;
+        text-align: left;  
+    }
 
-li {
-  display: block;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  padding: 15px;
-}
+    li {
+        display: block;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        padding: 15px;
+    }
 </style>
