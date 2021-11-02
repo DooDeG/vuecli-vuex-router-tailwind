@@ -10,26 +10,37 @@
                             <label class="mb-2 font-bold text-lg text-gray-900" for="first_name">Name</label>
                             <div class="tableTitle mt-4 mb-5 "><span class="midText"></span></div>
                         </div>
-                        <input class="border py-2 px-3 text-grey-800" type="text" name="first_name" id="first_name" v-model="product.name" value="name" >
+                        <input class="border py-2 px-3 text-grey-800" type="text" name="first_name" id="first_name" v-model="name" value="name" >
+                        <div class="flex justify-start">
+                                
+                            <span class="text-red-600 bg-white text-sm" v-show="nameError">輸入內容不能為空</span>
+                        </div>
                     </div>
                     <div class="flex flex-col mb-4">
                         <div class="flex justify-start">
                             <label class="mb-2 font-bold text-lg text-gray-900" for="last_name">price</label>
                             <div class="tableTitle mt-4 mb-5 "><span class="midText"></span></div>
                         </div>
-                        <input class="border py-2 px-3 text-grey-800" type="text" name="last_name" id="last_name" v-model="product.price" >
+                        <input class="border py-2 px-3 text-grey-800" type="text" name="last_name" id="last_name" v-model="price" >
                     </div>
-                    
+                    <div class="flex justify-start">
+                                
+                            <span class="text-red-600 bg-white text-sm" v-show="priceError">輸入內容不能為空</span>
+                        </div>
                     <div class="tableTitle mt-5 mb-5"><span class="midText"></span></div>
                     <div class="flex flex-col mb-4">
                         <div class="flex justify-start">
                             <label class="mb-2 font-bold text-lg text-gray-900" for="Select" >type</label>
                             <div class="tableTitle mt-4 mb-5 "><span class="midText"></span></div>
                         </div>
-                        <select class="border py-2 px-3 text-grey-800" v-model="product.type" >
-                            <option>{{product.type}}</option>
+                        <select class="border py-2 px-3 text-grey-800" v-model="type" >
+                            <option>{{type}}</option>
                         </select>
                     </div>
+                    <div class="flex justify-start">
+                                
+                            <span class="text-red-600 bg-white text-sm" v-show="typeError">輸入內容不能為空</span>
+                        </div>
                     <div class="flex flex-col mb-4">
                         <div class="flex justify-start">
                             <label class="mb-2 font-bold text-lg text-gray-900" for="File">Image</label>
@@ -37,13 +48,18 @@
                         </div>
                         <input class="border py-2 px-3 text-grey-800" type="file" name="file" id="file">
                     </div>
+                    <div class="flex justify-start">
+                                
+                            <span class="text-red-600 bg-white text-sm" v-show="imgError">輸入內容不能為空</span>
+                        </div>
                     <div class="flex flex-col mb-4">
                         <div class="flex justify-start">
                             <label class="mb-2 font-bold text-lg text-gray-900" for="textarea">描述</label>
                             <div class="tableTitle mt-4 mb-5 "><span class="midText"></span></div>
                         </div>
-                        <textarea class="border py-2 px-3 text-grey-800"  v-model="product.message" name="textarea" id="textarea"></textarea>
+                        <textarea class="border py-2 px-3 text-grey-800"  v-model="message" name="textarea" id="textarea"></textarea>
                     </div>
+                   
                     <button @click="addProd()" class="block uppercase mx-auto shadow bg-indigo-800 hover:bg-indigo-700 focus:shadow-outline focus:outline-none text-white text-xs py-3 px-10 rounded">提交</button>
                 </div>
             </div>
@@ -59,7 +75,17 @@ export default {
     data() {
         return {
         usersList: [],
-        product:[]
+        product:[],
+        name:'',
+        nameError: false,
+        price:'',
+        priceError: false,
+        type:'',
+        typeError: false,
+        message:'',
+        img:'',
+        imgError: false,
+
         };
     },
     components: {
@@ -95,23 +121,108 @@ export default {
             // this.$router.push('/');
             this.$router.push('/mains');
         },
+        getData(){
+            console.log(this.name)
+            if(!this.name || this.name == null || this.name == '' || this.name == 'undefined'){
+                this.nameError = true;
+            }else{
+                this.nameError = false;
+            }
+            if(!this.price || this.price == null || this.price == '' || this.price == 'undefined'){
+                this.priceError = true;
+            }else{
+                this.priceError = false;
+            }
+            if(!this.type || this.type == null || this.type == '' || this.type == 'undefined'){
+                this.typeError = true;
+            }else{
+                this.typeError = false;
+            }
+            if(!this.img || this.img == null || this.img == '' || this.img == 'undefined'){
+                this.imgError = true;
+            }else{
+                this.imgError = false;
+            }
+           
+                // let jsonObject = {};
+                // let json = [
+                //     {
+                //         key: "categories",
+                //         value: this.categories,
+                //     },
+                //     {
+                //         key: "RouteNo",
+                //         value: this.no,
+                //     },
+                //     {
+                //         key: "BusPlateNo",
+                //         value: this.BusPlateNo,
+                //     },
+                //     {
+                //         key: "date",
+                //         value: this.date,
+                //     },
+                //     {
+                //         key: "location",
+                //         value: this.location,
+                //     },
+                //     {
+                //         key: "content",
+                //         value: this.content,
+                //     },
+                //     {
+                //         key: "messageInfo",
+                //         value: this.messageInfo,
+                //     },
+                //     {
+                //         key: "name",
+                //         value: this.name,
+                //     },
+                //     {
+                //         key: "sex",
+                //         value: this.sex,
+                //     },
+                //     {
+                //         key: "contactType",
+                //         value: this.contactType,
+                //     },
+                //     {
+                //         key: "contactNo",
+                //         value: this.contactNo,
+                //     },
+                //     {
+                //         key: "contactHour",
+                //         value: Hour,
+                //     },
+                //     {
+                //         key: "contactEndHour",
+                //         value: end,
+                //     }
+                // ];
+                
+                // for (let itemindex = 0; itemindex < json.length; itemindex++) {
+                //     this.$set(jsonObject, json[itemindex].key+"", json[itemindex].value+"");
+                // }
+                // this.form = jsonObject;
+        },
         addProd(){
-            axios({
-                method: 'post',
-                url: this.$baseUrl+'Product/createProduct',
-                data: {
-                    product: this.product
-                }
-                })
+            this.getData();
+            // axios({
+            //     method: 'post',
+            //     url: this.$baseUrl+'Product/createProduct',
+            //     data: {
+            //         product: this.product
+            //     }
+            //     })
  
-                .then(res => {
+            //     .then(res => {
                     
-                    console.log(res)
-                })
-                .catch(error => {
-                    console.log(error)
-                    // Manage errors if found any
-            })
+            //         console.log(res)
+            //     })
+            //     .catch(error => {
+            //         console.log(error)
+            //         // Manage errors if found any
+            // })
         }
     }
 }
