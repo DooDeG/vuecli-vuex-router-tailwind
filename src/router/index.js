@@ -41,7 +41,7 @@ const routes = [
       { path: '/mains/menu', name: 'menu', component: menu },
       { path: '/mains/menu/add', name: 'menuadd', component: menuadd },
       { path: '/mains/menu/view/:id', name: 'menuview', component: menuview },
-      { path: '/mains/menu/modify', name: 'menumodify', component: menumodify },
+      { path: '/mains/menu/modify/:id', name: 'menumodify', component: menumodify },
       { path: '/mains/order', name: 'order', component: order },
       { path: '/mains/User', name: 'user', component: User },
       { path: '/mains/analysis', name: 'analysis', component: analysis },
