@@ -34,7 +34,7 @@
                             <div class="tableTitle mt-4 mb-5 "><span class="midText"></span></div>
                         </div>
                         <select class="border py-2 px-3 text-grey-800" v-model="type" >
-                            <option>{{type}}</option>
+                            <option>123</option>
                         </select>
                     </div>
                     <div class="flex justify-start">
@@ -75,7 +75,6 @@ export default {
     data() {
         return {
         usersList: [],
-        product:[],
         name:'',
         nameError: false,
         price:'',
@@ -83,9 +82,10 @@ export default {
         type:'',
         typeError: false,
         message:'',
-        img:'',
+        img:'456',
         imgError: false,
-
+        formError: false,
+        enable: true
         };
     },
     components: {
@@ -105,22 +105,6 @@ export default {
         
     },
     methods:{
-        getProductId () {
-            axios.get(this.$baseUrl+'Product/getProduct/'+this.slug)
-                .then(res => {
-                    console.log(res.data)
-                    this.product = res.data
-                })
-                .catch(error => {
-                    console.log(error)
-                    // Manage errors if found any
-            })
-        },
-        cancelButton(){
-            alert("data not save");
-            // this.$router.push('/');
-            this.$router.push('/mains');
-        },
         getData(){
             console.log(this.name)
             if(!this.name || this.name == null || this.name == '' || this.name == 'undefined'){
@@ -143,86 +127,36 @@ export default {
             }else{
                 this.imgError = false;
             }
-           
-                // let jsonObject = {};
-                // let json = [
-                //     {
-                //         key: "categories",
-                //         value: this.categories,
-                //     },
-                //     {
-                //         key: "RouteNo",
-                //         value: this.no,
-                //     },
-                //     {
-                //         key: "BusPlateNo",
-                //         value: this.BusPlateNo,
-                //     },
-                //     {
-                //         key: "date",
-                //         value: this.date,
-                //     },
-                //     {
-                //         key: "location",
-                //         value: this.location,
-                //     },
-                //     {
-                //         key: "content",
-                //         value: this.content,
-                //     },
-                //     {
-                //         key: "messageInfo",
-                //         value: this.messageInfo,
-                //     },
-                //     {
-                //         key: "name",
-                //         value: this.name,
-                //     },
-                //     {
-                //         key: "sex",
-                //         value: this.sex,
-                //     },
-                //     {
-                //         key: "contactType",
-                //         value: this.contactType,
-                //     },
-                //     {
-                //         key: "contactNo",
-                //         value: this.contactNo,
-                //     },
-                //     {
-                //         key: "contactHour",
-                //         value: Hour,
-                //     },
-                //     {
-                //         key: "contactEndHour",
-                //         value: end,
-                //     }
-                // ];
-                
-                // for (let itemindex = 0; itemindex < json.length; itemindex++) {
-                //     this.$set(jsonObject, json[itemindex].key+"", json[itemindex].value+"");
-                // }
-                // this.form = jsonObject;
+
+
+            if(this.nameError == true || this.price == true || this.typeError == true || this.imgError == true){
+                this.formError = true; 
+            }else{
+                this.formError = false; 
+            }
+
         },
         addProd(){
             this.getData();
-            // axios({
-            //     method: 'post',
-            //     url: this.$baseUrl+'Product/createProduct',
-            //     data: {
-            //         product: this.product
-            //     }
-            //     })
- 
-            //     .then(res => {
-                    
-            //         console.log(res)
-            //     })
-            //     .catch(error => {
-            //         console.log(error)
-            //         // Manage errors if found any
-            // })
+            if(this.formError == false){
+                axios.post(this.$baseUrl+'Product/createProduct', {
+                    "name":  this.name,
+                    "price": this.price,
+                    "type": this.type,
+                    "img": "this.img",
+                    "enable": this.enable,
+                    "message": this.message
+                })
+                .then(res => {
+                    console.log(res.data)
+                    this.$router.push('/mains');
+                })
+                .catch(error => {
+                    console.log(error)
+                    // Manage errors if found any
+                })
+            }
+            
         }
     }
 }

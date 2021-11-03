@@ -33,8 +33,9 @@ axios.defaults.timeout = 5000  // 超时时间
 
 axios.interceptors.request.use(
   config => {
-    if (localStorage.getItem('Authorization')) {
-      config.headers.Authorization = localStorage.getItem('Authorization');
+    let token = localStorage.getItem('Authorization')
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
     }
   
     return config;
