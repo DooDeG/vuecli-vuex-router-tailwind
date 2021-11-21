@@ -10,6 +10,9 @@ import menu from '../views/Mains/Menus/menu.vue'
 import menuadd from '../views/Mains/Menus/add.vue'
 import menuview from '../views/Mains/Menus/view.vue'
 import menumodify from '../views/Mains/Menus/modify.vue'
+import Type from '../views/Mains/Menus/Type/index.vue'
+import Typeadd from '../views/Mains/Menus/Type/add.vue'
+import Typemodify from '../views/Mains/Menus/Type/modify.vue'
 import order from '../views/Mains/Orders/order.vue'
 import User from '../views/Mains/UserManagement/index.vue'
 import printer from '../views/Mains/prints/printer.vue'
@@ -42,6 +45,9 @@ const routes = [
       { path: '/mains/menu/add', name: 'menuadd', component: menuadd },
       { path: '/mains/menu/view/:id', name: 'menuview', component: menuview },
       { path: '/mains/menu/modify/:id', name: 'menumodify', component: menumodify },
+      { path: '/mains/menu/type', name: 'type', component: Type },
+      { path: '/mains/menu/Typeadd', name: 'Typeadd', component: Typeadd },
+      { path: '/mains/menu/Typemodify/:id', name: 'Typemodify', component: Typemodify },
       { path: '/mains/order', name: 'order', component: order },
       { path: '/mains/User', name: 'user', component: User },
       { path: '/mains/analysis', name: 'analysis', component: analysis },

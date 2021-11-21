@@ -146,14 +146,34 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
                                             </svg>
 
-                                            <span class="ml-2">add</span>
+                                            <span class="ml-2">添加产品</span>
+                                        </button>
+                                    </router-link>
+                                    <router-link to="/mains/menu/type">
+                                        <button 
+                                            type="button" 
+                                            class="ml-5 px-4 py-3 bg-blue-600 rounded-md text-white outline-none focus:ring-4 shadow-lg transform active:scale-y-75 transition-transform flex"
+                                        >
+                                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                                            </svg>
+
+                                            <span class="ml-2">添加或修改种类</span>
                                         </button>
                                      </router-link>
                                 </div>
                             </div>
                         </div>
                     </div>
-    
+                    <div class="card bg-white py-3 px-5 rounded-xl flex flex-col mb-5 mt-5">
+                        <div class="title text-xl font-medium">种类</div>
+                        <div class="w-full py-3">
+                            <div class="inline-block mr-2 mt-2" v-for="item in type" :key="item.id">
+                                <button type="button" class="focus:outline-none text-blue-600 text-sm py-2.5 px-5 rounded-full border border-blue-600 hover:bg-blue-50">{{item.type}}</button>
+                            </div>
+                            
+                        </div>
+                    </div>
                     <div class="flex flex-col mt-8">
                         <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                             <div
@@ -163,7 +183,7 @@
                                         <tr class="">
                                             <th
                                                 class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                                菜名</th>
+                                                名</th>
                                             <th
                                                 class=" px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                                 <div class="flex justify-start">价格</div>
@@ -269,7 +289,8 @@ export default {
     data() {
         return {
             menu: [],
-            slug:''
+            slug:'',
+            type: []
         };
     },
     components: {
@@ -287,6 +308,7 @@ export default {
     },
     created(){
         this.getProduct();
+        this.getTypeAll();
     },
     methods:{
         
@@ -303,12 +325,29 @@ export default {
                     // Manage errors if found any
             })
         },
+
+        getTypeAll () {
+            this.type = [];
+            axios.get(this.$baseUrl+'Type/getAll')
+                .then(res => {
+                    res.data.value.type.forEach(item => {
+                        this.type.push(item) 
+                    });
+                    console.log(this.type)
+                })
+                .catch(error => {
+                    console.log(error)
+                    // Manage errors if found any
+            })
+        },
+
         delProd(id){
             axios.delete(this.$baseUrl+'Product/deleteProduct/'+id)
                 .then(res => {
                     
                     console.log(res)
                     this.getProduct();
+                    alert("delete sucess")
                 })
                 .catch(error => {
                     console.log(error)
