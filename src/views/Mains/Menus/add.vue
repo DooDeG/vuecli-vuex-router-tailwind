@@ -34,7 +34,9 @@
                             <div class="tableTitle mt-4 mb-5 "><span class="midText"></span></div>
                         </div>
                         <select class="border py-2 px-3 text-grey-800" v-model="type" >
-                            <option>123</option>
+                            <option v-for="item in typelist" :value="item.type" :key="item.id">
+                                {{item.type}}
+                            </option>
                         </select>
                     </div>
                     <div class="flex justify-start">
@@ -85,7 +87,9 @@ export default {
         img:'456',
         imgError: false,
         formError: false,
-        enable: true
+        enable: true,
+        typelist:[],
+        orderslist:[]
         };
     },
     components: {
@@ -102,9 +106,24 @@ export default {
         })
     },
     created(){
-        
+        this.getTypeAll()
     },
     methods:{
+
+        getTypeAll () {
+            this.type = [];
+            axios.get(this.$baseUrl+'Type/getAll')
+                .then(res => {
+                    res.data.value.type.forEach(item => {
+                        this.typelist.push(item) 
+                    });
+                    console.log(this.type)
+                })
+                .catch(error => {
+                    console.log(error)
+                    // Manage errors if found any
+            })
+        },
         getData(){
             console.log(this.name)
             if(!this.name || this.name == null || this.name == '' || this.name == 'undefined'){
