@@ -257,7 +257,8 @@ export default {
     data() {
         return {
             menu: [],
-            slug:''
+            slug:'',
+            sidebarOpen:false
         };
     },
     components: {

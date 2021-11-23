@@ -82,7 +82,8 @@ router.beforeEach((to, from, next) => {
     let date = new Date().getTime();
     if (token === null || token === '') {
       next('/');
-    } if (date - token.startTime > EXPIRESTIME) {
+    // } if (date - token.startTime > EXPIRESTIME) {
+    } if (date - localStorage.getItem('startTime') > EXPIRESTIME) {
       localStorage.removeItem('token');
       next('/');
     }else {

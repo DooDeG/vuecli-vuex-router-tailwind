@@ -130,7 +130,8 @@ export default {
     name: 'Index',
     data() {
         return {
-        usersList: []
+        usersList: [],
+        sidebarOpen: false
         };
     },
     components: {

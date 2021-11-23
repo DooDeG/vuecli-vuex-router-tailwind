@@ -83,6 +83,8 @@
                     })
                     .then(res => {
                         console.log(res.data);
+                        var startTime= new Date().getTime()
+                        localStorage.setItem("startTime", startTime);
                         this.changeLogin({Authorization: res.data.token });
                         this.$router.push('mains');
                         alert('登陆成功');

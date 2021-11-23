@@ -289,6 +289,7 @@ export default {
     data() {
         return {
             menu: [],
+            sidebarOpen: false,
             slug:'',
             type: []
         };
