@@ -48,38 +48,47 @@
             </div>
             <hr class="my-3">
             <div class="flex justify-between mt-6"
-                v-for="orderitem in orderList" :value="item" :key="orderitem.id">
+                v-for="orderitem in details" :value="item" :key="orderitem.Pid">
                 <div class="flex">
                     <img class="h-20 w-20 object-cover rounded" src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80" alt="">
                     <div class="mx-3">
-                        <h3 class="text-sm text-gray-600">{{orderitem.name}}</h3>
+                        <h3 class="text-sm text-gray-600">{{orderitem.Product}}</h3>
                         <div class="flex items-center mt-2">
-                            <button class="text-gray-500 focus:outline-none focus:text-gray-600">
+                            <button @click="addunit(orderitem)"
+                                class="text-gray-500 focus:outline-none focus:text-gray-600">
                                 <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             </button>
-                            <span class="text-gray-700 mx-2">2</span>
-                            <button class="text-gray-500 focus:outline-none focus:text-gray-600">
+                            <span class="text-gray-700 mx-2">{{orderitem.Quantity}}</span>
+                            <button @click="delunit(orderitem)"
+                                class="text-gray-500 focus:outline-none focus:text-gray-600">
                                 <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             </button>
                         </div>
                     </div>
                 </div>
-                <span class="text-gray-600">${{orderitem.price}}</span>
+                <div class="flex flex-col">
+                    <span class="text-gray-600">${{orderitem.QPrice}}</span>
+                    <button @click="del(orderitem)"
+                            class="ml-3 flex items-center px-3 py-2 bg-red-600 text-white text-sm uppercase font-medium rounded hover:bg-red-500 focus:outline-none focus:bg-blue-500">
+                        <span>del</span>
+                    </button>
+                </div>
                 
             </div>
             
             <div class="mt-8">
                 <form class="flex items-center justify-center">
                     <input class="form-input w-48" type="text" placeholder="Add promocode">
-                    <button class="ml-3 flex items-center px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+                    <button 
+                        class="ml-3 flex items-center px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
                         <span>Apply</span>
                     </button>
                 </form>
             </div>
-            <a class="flex items-center justify-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+            <button @click="postOrder()" class="flex items-center justify-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
                 <span>Chechout</span>
                 <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-            </a>
+            </button>
         </div>
         
         <main class="my-8">
@@ -103,6 +112,7 @@
                 </div>
             </div>
         </main>
+        {{details}}
     </div>
 </template>
 
@@ -116,7 +126,8 @@ export default {
             menu: [],
             cartOpen: false,
             isOpen: false,
-            orderList:[]
+            orderList:[],
+            details:[]
         };
     },
     components: {
@@ -129,8 +140,126 @@ export default {
         
     },
     methods:{
-        addShoppingCart(item){
-            this.orderList.push(item) 
+        getPrice(){
+            var p = 0
+            this.details.forEach(element => {
+                p += element.QPrice
+            });
+            return p
+        },
+        postOrder(){
+            const tprice = this.getPrice()
+            const i = Math.ceil(Math.random()*100000)
+            this.getPrice();
+            var currentdate = new Date(); 
+            var datetime = currentdate.getFullYear()  + "-" 
+                            + (currentdate.getMonth()+1)  + "-" 
+                            +  currentdate.getDate() + " "
+                            + currentdate.getHours() + ":"  
+                            + currentdate.getMinutes() + ":" 
+                            + currentdate.getSeconds();
+            const currentDate = datetime;
+            if(tprice >0){
+                axios.post(this.$baseUrl+'Order/addOrder', {
+                    "id": currentDate +"/"+ tprice+"/" +i,
+                    "price": tprice,
+                    "enable": true,
+                    "status": "pending",
+                    // "createdDate": currentDate,
+                    "comment": "",
+                    "customer": "adminOrder",
+                    "details": this.details
+                })
+                .then(res => {
+                    console.log(res.data)
+                    this.$router.push('/mains');
+                })
+                .catch(error => {
+                    console.log(error)
+                    // Manage errors if found any
+                })
+            }else{
+                alert("order list is null")
+            }
+        },
+        addShoppingCart(items){
+            var cdo = true
+            this.details.forEach(element => {
+                if(element.Pid ==items.id ){
+                    element.Quantity ++
+                    element.QPrice += items.price
+                    cdo = false
+                }
+            });
+            if(cdo == true){
+                // var tmp = new Array();
+                // var tmp = 
+                //     {   
+                //         "pid": items.id,
+                //         "product": items.name,
+                //         "oid": items.id,
+                //         "qPrice": items.price,
+                //         "quantity": 1,
+                //         "enable": true
+                //     }
+                 var tmp = {}
+                tmp['Pid'] = items.id,
+                tmp['Product'] = items.name,
+                tmp['Oid'] = "string",
+                tmp['QPrice'] = items.price,
+                tmp['Quantity'] = 1,
+                tmp['Enable'] = true
+                
+                this.details.push(tmp) 
+            }
+            
+            cdo = false
+        },
+        del(item){
+            this.details = this.remove(this.details,item)
+        },
+        
+            //正确代码
+        remove(arr, item) {
+            var newarr=[];
+            arr.forEach(function(element){
+                if(element.Pid!=item.Pid){
+                    newarr.push(element)
+                }
+            })
+            return newarr;
+        },
+        addunit(item){
+            console.log(item)
+            var price = 0
+            this.menu.forEach(element => {
+                if(element.id ==item.Pid ){
+                    price = element.price
+                }
+            });
+            this.details.forEach(element => {
+                if(element.Pid ==item.Pid ){
+                    item.Quantity ++
+                    item.QPrice += price
+                }
+            });
+        },
+        delunit(item){
+            console.log(item)
+            var price = 0
+            this.menu.forEach(element => {
+                if(element.id ==item.Pid ){
+                    price = element.price
+                }
+            });
+            if(item.Quantity > 1){
+                this.details.forEach(element => {
+                if(element.Pid ==item.Pid ){
+                    item.Quantity --
+                    item.QPrice -= price
+                }
+            });
+            }
         },
         getProduct () {
             this.menu = [];
@@ -145,23 +274,6 @@ export default {
                     // Manage errors if found any
             })
         },
-        addProd(){
-            this.getData();
-            if(this.formError == false){
-                axios.post(this.$baseUrl+'Product/createProduct', {
-            
-                })
-                .then(res => {
-                    console.log(res.data)
-                    this.$router.push('/mains');
-                })
-                .catch(error => {
-                    console.log(error)
-                    // Manage errors if found any
-                })
-            }
-            
-        }
     }
 }
 </script>
