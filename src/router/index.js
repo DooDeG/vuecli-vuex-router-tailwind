@@ -14,6 +14,7 @@ import Type from '../views/Mains/Menus/Type/index.vue'
 import Typeadd from '../views/Mains/Menus/Type/add.vue'
 import Typemodify from '../views/Mains/Menus/Type/modify.vue'
 import order from '../views/Mains/Orders/order.vue'
+import processOrder from '../views/Mains/Orders/processOrder.vue'
 import User from '../views/Mains/UserManagement/index.vue'
 import printer from '../views/Mains/prints/printer.vue'
 
@@ -48,12 +49,13 @@ const routes = [
       { path: '/mains/menu/type', name: 'type', component: Type },
       { path: '/mains/menu/Typeadd', name: 'Typeadd', component: Typeadd },
       { path: '/mains/menu/Typemodify/:id', name: 'Typemodify', component: Typemodify },
-      { path: '/mains/order', name: 'order', component: order },
       { path: '/mains/User', name: 'user', component: User },
       { path: '/mains/analysis', name: 'analysis', component: analysis },
       { path: '/mains/brand', name: 'brand', component: brand },
       { path: '/mains/printer', name: 'printer', component: printer },
       { path: '/mains/bdorder', name: 'bdorder', component: bdorder },
+      { path: '/mains/order', name: 'order', component: order },
+      { path: '/mains/processOrder/:id', name: 'processOrder', component: processOrder },
 
     ] 
   },

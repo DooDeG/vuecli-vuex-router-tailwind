@@ -1,4 +1,3 @@
-
 <template>
     <div class="index">
         <div class="flex-1 flex flex-col overflow-hidden">
@@ -111,7 +110,7 @@
             </header>
             <main class="flex-1 bg-gray-200">
                 <div class="container mx-auto px-6 py-8">
-                    <h3 class="text-gray-700 text-3xl font-medium">Dashboard</h3>
+                    <h3 class="text-gray-700 text-3xl font-medium">後台訂單處理頁面</h3>
                     <div class="mt-8">
                         
                         <div class="flex justify-start">
@@ -143,9 +142,9 @@
                     </div>
                     <div class="flex flex-col mt-8">
                         <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                            <div
-                                class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
-                                <table class="min-w-full">
+                            <div style="height: 700px"
+                                class="align-middle inline-block min-w-full shadow overflow-y-auto sm:rounded-lg border-b border-gray-200">
+                                <table class="min-w-full ">
                                     <thead>
                                         <tr class="">
                                             <th
@@ -202,32 +201,16 @@
     
                                             <td
                                                 class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                                                <a href="#" class="text-indigo-600 hover:text-indigo-900">
-                                                    <div class="flex item-center justify-center">
-                                                    <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                                        <router-link :to="{ name:'menuview', params:{id: item.id } }">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                                            </svg>
+                                                <router-link :to="{ name:'processOrder', params:{id: item.id } }">
+                                                            <div class="m-3">
+                                                                <button class="bg-white text-gray-800 font-bold rounded border-b-2 border-green-500 hover:border-green-600 hover:bg-green-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center">
+                                                                <span class="mr-2">訂單處理</span>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24">
+                                                                    <path fill="currentcolor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+                                                                </svg>
+                                                                </button>
+                                                            </div>
                                                         </router-link>
-                                                    </div>
-                                                    <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                                        <router-link :to="{ name:'menumodify', params:{id: item.id } }">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                                            </svg>
-                                                        </router-link>
-                                                    </div>
-                                                    <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                                        <div class="" @click="delProd(item.id)">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                        </svg>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                </a>
                                             </td>
                                         </tr>
                                        

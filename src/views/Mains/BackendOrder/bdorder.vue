@@ -161,7 +161,7 @@ export default {
             const currentDate = datetime;
             if(tprice >0){
                 axios.post(this.$baseUrl+'Order/addOrder', {
-                    "id": currentDate +"/"+ tprice+"/" +i,
+                    "id": currentDate +"--"+ tprice+"--" +i,
                     "price": tprice,
                     "enable": true,
                     "status": "pending",
