@@ -16,7 +16,8 @@ import Typemodify from '../views/Mains/Menus/Type/modify.vue'
 import order from '../views/Mains/Orders/order.vue'
 import processOrder from '../views/Mains/Orders/processOrder.vue'
 import User from '../views/Mains/UserManagement/index.vue'
-import printer from '../views/Mains/prints/printer.vue'
+import Printer from '../views/Mains/Prints/printer.vue'
+import dashboard from '../views/Mains/Dashboard/dashboard.vue'
 
 
 Vue.use(VueRouter)
@@ -41,7 +42,8 @@ const routes = [
     name: 'mains',
     component: index,
     children: [
-      { path: '', redirect: { name: 'menu' } },
+      { path: '', redirect: { name: 'dashboard' } },
+      { path: '/mains/dashboard', name: 'dashboard', component: dashboard },
       { path: '/mains/menu', name: 'menu', component: menu },
       { path: '/mains/menu/add', name: 'menuadd', component: menuadd },
       { path: '/mains/menu/view/:id', name: 'menuview', component: menuview },
@@ -52,7 +54,7 @@ const routes = [
       { path: '/mains/User', name: 'user', component: User },
       { path: '/mains/analysis', name: 'analysis', component: analysis },
       { path: '/mains/brand', name: 'brand', component: brand },
-      { path: '/mains/printer', name: 'printer', component: printer },
+      { path: '/mains/printer', name: 'printer', component: Printer },
       { path: '/mains/bdorder', name: 'bdorder', component: bdorder },
       { path: '/mains/order', name: 'order', component: order },
       { path: '/mains/processOrder/:id', name: 'processOrder', component: processOrder },

@@ -1,13 +1,13 @@
 <template>
   <div id="app">
-    <div>{{ VUE_APP_URL }}</div>
+    <!-- <div>{{ VUE_APP_URL }}</div>
     <div>{{ k }}</div>
     <div></div>
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/mains">menu</router-link>
-    </div>
+    </div> -->
     <!-- <router-view/> -->
     <!-- <indexpage msg="Welcome to Your Vue.js App"/> -->
     <router-view />

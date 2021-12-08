@@ -28,21 +28,22 @@
                                             <circle cx="7.04807" cy="6.97256" r="2.5" id="svg_3"></circle>
                                         </g>
                                     </svg>
-                                    <h1 class="inline text-2xl font-semibold leading-none">Sender</h1>
+                                    <h1 class="inline text-2xl font-semibold leading-none">{{item.product}}</h1>
                                 </div>
                             </div>
                             <div class="px-5 pb-5">
-                                <input  placeholder="Name" class=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"><input  placeholder="Address" class=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"> 
+                                <input disabled :placeholder="item.product" class=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400">
                                 <div class="flex">
-                                    <div class="flex-grow w-1/4 pr-2"><input  placeholder="PLZ" class=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"></div>
-                                    <div class="flex-grow"><input placeholder="City" class=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"></div>
+                                    <div class="flex-grow w-1/4 pr-2"><input disabled :placeholder="item.quantity" class=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"></div>
+                                    <div class="flex-grow"><input disabled :placeholder="item.qPrice" class=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"></div>
                                 </div>
+                                
                             </div>
                         </div>
                         <hr class="mt-4">
                         <div class="flex flex-row-reverse p-3">
                             <div class="flex-initial pl-3">
-                                <button type="button" class="flex items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize   bg-black rounded-md hover:bg-gray-800  focus:outline-none focus:bg-gray-900  transition duration-300 transform active:scale-95 ease-in-out">
+                                <button @click="orderDone()" type="button" class="flex items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize   bg-black rounded-md hover:bg-gray-800  focus:outline-none focus:bg-gray-900  transition duration-300 transform active:scale-95 ease-in-out">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF">
                                         <path d="M0 0h24v24H0V0z" fill="none"></path>
                                         <path d="M5 5v14h14V7.83L16.17 5H5zm7 13c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-8H6V6h9v4z" opacity=".3"></path>
@@ -90,7 +91,7 @@
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
     </div>
 </template>
 
@@ -125,13 +126,13 @@ export default {
         },
         getOrderDetail(){
             this.orderList = [];
-            axios.get(this.$baseUrl+'Order/getOrder/'+this.slug)
+            axios.get(this.$baseUrl+'Order/getOrderDetail/'+this.slug)
                 .then(res => {
-                    console.log(res.data)
-                    var tmp = res.data
-                    tmp.forEach(item => {
+                    console.log('res',res.data.value.ord.result)
+                    res.data.value.ord.result.forEach(item => {
                         this.orderList.push(item) 
                     });
+                    console.log('this.orderList',this.orderList)
                 })
                 .catch(error => {
                     console.log(error)
@@ -139,7 +140,18 @@ export default {
             })
             
                     console.log("456",this.orderList)
-        }
+        },
+        orderDone(){
+            axios.put(this.$baseUrl+'Order/OrderDone/'+this.slug, {
+                })
+                .then(res => {
+                    console.log(res.data)
+                    this.$router.push('/mains/order');
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        },
     }
 }
 </script>

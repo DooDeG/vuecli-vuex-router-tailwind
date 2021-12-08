@@ -1,7 +1,7 @@
 <template>
     <div x-data="{ cartOpen: false , isOpen: false }" class="bg-white">
         <header>
-            <div class="container mx-auto px-6 py-3">
+            <div class="container mx-auto px-6 py-3 pt-12">
                 <div class="flex items-center justify-between">
                     <div class="hidden w-full text-gray-600 md:flex md:items-center">
                         <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -39,7 +39,7 @@
                 </div>
             </div>
         </header>
-        <div :class="cartOpen ? 'translate-x-0 ease-out' : 'translate-x-full ease-in'" class="fixed right-0 top-0 max-w-xs w-full h-full px-6 py-4 transition duration-300 transform overflow-y-auto bg-white border-l-2 border-gray-300">
+        <div :class="cartOpen ? 'translate-x-0 ease-out' : 'translate-x-full ease-in'" class="mt-16 fixed right-0 top-0 max-w-xs w-full h-full px-6 py-4 transition duration-300 transform overflow-y-auto bg-white border-l-2 border-gray-300">
             <div class="flex items-center justify-between">
                 <h3 class="text-2xl font-medium text-gray-700">Your cart</h3>
                 <button @click="cartOpen = !cartOpen" class="text-gray-600 focus:outline-none">
@@ -79,8 +79,7 @@
             <div class="mt-8">
                 <form class="flex items-center justify-center">
                     <input class="form-input w-48" type="text" placeholder="Add promocode">
-                    <button 
-                        class="ml-3 flex items-center px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+                    <button class="ml-3 flex items-center px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
                         <span>Apply</span>
                     </button>
                 </form>
@@ -92,6 +91,7 @@
         </div>
         
         <main class="my-8">
+            
             <div class="container mx-auto px-6">
                 <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
 
@@ -172,7 +172,7 @@ export default {
                 })
                 .then(res => {
                     console.log(res.data)
-                    this.$router.push('/mains');
+                    this.$router.push('/mains/order');
                 })
                 .catch(error => {
                     console.log(error)
