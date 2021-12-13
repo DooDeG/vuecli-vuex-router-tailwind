@@ -11,31 +11,32 @@
                         </div>
                     </nav>
                     <div class="mt-8">
-                        
-                        <div class="flex justify-start">
-                            <div>
-                                <div class="w-full flex justify-center">
-                                    <button 
-                                        type="button" 
-                                        class="px-4 py-3 bg-blue-600 rounded-md text-white outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform"
-                                    >
-                                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                                        </svg>
-                                    
-                                    </button>
-
-                                    <button 
-                                        type="button" 
-                                        class="px-4 py-3 bg-blue-600 rounded-md text-white outline-none focus:ring-4 shadow-lg transform active:scale-x-75 transition-transform mx-5 flex"
-                                    >
-                                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                                        </svg>
-
-                                        <span class="ml-2">Download</span>
-                                    </button>
-                                </div>
+                        <div class="w-full flex justify-between">
+                            <div class="flex bg-white border rounded-full overflow-hidden select-none">
+                                <button @click="ratioSelect" class=" hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50
+                                title py-3 my-auto px-5 bg-blue-500 text-white text-sm font-semibold mr-3">訂單</button>
+                                <label class="flex items-center radio p-2 cursor-pointer">
+                                    <input v-model="radioP"  class="my-auto transform scale-125" type="radio" id="today" value="today"/>
+                                    <div for="today" class="title px-2">今日未處理訂單</div>
+                                </label>
+                                <label class="flex items-center radio p-2 cursor-pointer">
+                                    <input v-model="radioP"  class="my-auto transform scale-125" type="radio" id="all" value="all"/>
+                                    <div for="all" class="title px-2">全部未處理訂單</div>
+                                </label>
+                            </div>
+                            <!-- This is an example component -->
+                            <div class="flex justify-center text-gray-600">
+                                <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+                                type="search" name="search" placeholder="Search">
+                                <button type="submit" class="absolute right-0 top-0 mt-5 mr-4">
+                                <svg class="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
+                                    viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
+                                    width="512px" height="512px">
+                                    <path
+                                    d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                                </svg>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -135,28 +136,40 @@ export default {
             order: [],
             sidebarOpen: false,
             slug:'',
-            type: []
+            type: [],
+            radioP:'today'
         };
     },
     components: {
     },
     mounted() {
-        axios.get("https://jsonplaceholder.typicode.com/users")
-        .then(res => {
-            this.usersList = res.data;
-            console.log(this.usersList)
-        })
-        .catch(error => {
-            console.log(error)
-            // Manage errors if found any
-        })
     },
     created(){
-        this.getAllOrder();
+        // 
+        this.getTodayOrder();
     },
     methods:{
-        
-        getAllOrder () {
+        ratioSelect(){
+            if(this.radioP == "all"){
+                this.getAllOrder() 
+            }else{
+                this.getTodayOrder()
+            }
+        },
+        getTodayOrder() {
+            this.order = [];
+            axios.get(this.$baseUrl+'Order/GetOrderByTodayPending')
+                .then(res => {
+                    res.data.value.order.forEach(item => {
+                        this.order.push(item) 
+                    });
+                })
+                .catch(error => {
+                    console.log(error)
+                    // Manage errors if found any
+            })
+        },
+        getAllOrder() {
             this.order = [];
             axios.get(this.$baseUrl+'Order/getAll')
                 .then(res => {

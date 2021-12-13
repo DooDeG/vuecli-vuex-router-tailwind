@@ -127,7 +127,7 @@ export default {
             cartOpen: false,
             isOpen: false,
             orderList:[],
-            details:[]
+            details:[],
         };
     },
     components: {
@@ -165,7 +165,7 @@ export default {
                     "price": tprice,
                     "enable": true,
                     "status": "pending",
-                    // "createdDate": currentDate,
+                    // "createdDate": datetime,
                     "comment": "",
                     "customer": "adminOrder",
                     "details": this.details
