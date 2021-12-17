@@ -186,7 +186,7 @@
                                 <span class="mx-3">品牌</span>
                             </a>
                             </router-link>
-                            <router-link to="/mains/printer" class=" hover:text-blue active:border-r-4 active:border-gray-700">
+                            <!-- <router-link to="/mains/printer" class=" hover:text-blue active:border-r-4 active:border-gray-700">
                             <a class="flex items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                                 >
                                 <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -198,7 +198,7 @@
                 
                                 <span class="mx-3">printer</span>
                             </a>
-                            </router-link>
+                            </router-link> -->
                         
                             <!-- <ul class="space-y-2 pb-2">
                                 <li>
