@@ -20,6 +20,10 @@
                                     <div for="today" class="title px-2">今日未處理訂單</div>
                                 </label>
                                 <label class="flex items-center radio p-2 cursor-pointer">
+                                    <input v-model="radioP"  class="my-auto transform scale-125" type="radio" id="allOrder" value="allOrder"/>
+                                    <div for="allOrder" class="title px-2">今日全部訂單</div>
+                                </label>
+                                <label class="flex items-center radio p-2 cursor-pointer">
                                     <input v-model="radioP"  class="my-auto transform scale-125" type="radio" id="all" value="all"/>
                                     <div for="all" class="title px-2">全部未處理訂單</div>
                                 </label>
@@ -152,6 +156,8 @@ export default {
         ratioSelect(){
             if(this.radioP == "all"){
                 this.getAllOrder() 
+            }else if(this.radioP == "allOrder"){
+                this.getAllTodayOrder()
             }else{
                 this.getTodayOrder()
             }
@@ -169,6 +175,20 @@ export default {
                     // Manage errors if found any
             })
         },
+        getAllTodayOrder() {
+            this.order = [];
+            axios.get(this.$baseUrl+'Order/getAllTodayOrder')
+                .then(res => {
+                    res.data.value.order.forEach(item => {
+                        this.order.push(item) 
+                    });
+                })
+                .catch(error => {
+                    console.log(error)
+                    // Manage errors if found any
+            })
+        },
+        
         getAllOrder() {
             this.order = [];
             axios.get(this.$baseUrl+'Order/getAll')
