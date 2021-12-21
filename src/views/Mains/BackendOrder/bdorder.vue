@@ -28,7 +28,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="relative mt-6 max-w-lg mx-auto">
+                <!-- <div class="relative mt-6 max-w-lg mx-auto">
                 <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
                     <svg class="h-5 w-5 text-gray-500" viewBox="0 0 24 24" fill="none">
                         <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -36,7 +36,7 @@
                 </span>
 
                     <input class="w-full border rounded-md pl-10 pr-4 py-2 focus:border-blue-500 focus:outline-none focus:shadow-outline" type="text" placeholder="Search">
-                </div>
+                </div> -->
             </div>
         </header>
         <div :class="cartOpen ? 'translate-x-0 ease-out' : 'translate-x-full ease-in'" class="mt-16 fixed right-0 top-0 max-w-xs w-full h-full px-6 py-4 transition duration-300 transform overflow-y-auto bg-white border-l-2 border-gray-300">
@@ -77,38 +77,56 @@
             </div>
             
             <div class="mt-8">
-                <form class="flex items-center justify-center">
-                    <input class="form-input w-48" type="text" placeholder="Add promocode">
-                    <button class="ml-3 flex items-center px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+                <form class="flex items-center justify-start">
+                    <select v-model="planSelected">
+                        <option disabled value="">選擇優惠</option>
+                        <option value="9折優惠">9折優惠</option>
+                        <option value="8折優惠">8折優惠</option>
+                        <option value="買一送一">買一送一</option>
+                        <option value="沒有優惠">沒有優惠</option>
+                    </select>
+                    <button class="flex items-center justify-center ml-2 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
                         <span>Apply</span>
                     </button>
                 </form>
             </div>
+            
+            <!-- <button @click="printer()" class="flex items-center justify-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+                <span>Printer</span>
+                <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+            </button> -->
             <button @click="postOrder()" class="flex items-center justify-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
                 <span>Chechout</span>
                 <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
             </button>
         </div>
         
-        <main class="my-8">
+        <main class="my-8 pb-10">
             
             <div class="container mx-auto px-6">
                 <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
 
-                    <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden" 
+                    <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden border-t-4" 
                         v-for="item in menu" :value="item" :key="item.id">
-                        <div class="flex items-end justify-end h-56 w-full bg-cover" style="background-image: url('https://images.unsplash.com/photo-1495856458515-0637185db551?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80')">
+                        <!-- <div class="flex items-end justify-end h-56 w-full bg-cover" style="background-image: url('https://images.unsplash.com/photo-1495856458515-0637185db551?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80')">
                             <button class="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
                                     @click="addShoppingCart(item)">
                                 <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                             </button>
-                        </div>
-                        <div class="px-5 py-3">
-                            <h3 class="text-gray-700 uppercase">{{item.name}}</h3>
-                            <span class="text-gray-500 mt-2">${{item.price}}</span>
+                        </div> -->
+                        <div class="flex justify-around  w-full bg-cover">
+                            <div class="px-5 py-3">
+                                <h3 class="text-gray-700 uppercase">{{item.name}}</h3>
+                                <span class="text-gray-500 mt-2">${{item.price}}</span>
+                            </div>
+                            <div class="mt-4">
+                            <button class="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
+                                    @click="addShoppingCart(item)">
+                                <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            </button>
+                            </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </main>
@@ -117,6 +135,7 @@
 
 <script>
 import axios from "axios";
+import {addprinter, print} from './printer';
 
 export default {
     name: 'backendOrder',
@@ -127,6 +146,7 @@ export default {
             isOpen: false,
             orderList:[],
             details:[],
+            planSelected: ''
         };
     },
     components: {
@@ -139,6 +159,40 @@ export default {
         
     },
     methods:{
+        printer(totalPrice, currentDate){
+            // addprinter(922560443)
+            console.log(this.details)
+            var orderInfo;
+            orderInfo = "<CB>Areolite cafe</CB><BR>";//标题字体如需居中放大,就需要用标签套上
+            orderInfo += "產品名稱　　單價　數量　金額<BR>";
+            orderInfo += "--------------------------------<BR>";
+            this.details.forEach(element => {
+            orderInfo += this.formatStringLen(element.Product, 6, " ")+"  "+this.formatStringLen(element.unitPrice.toString(), 6, " ") + this.formatStringLen(element.Quantity.toString(), 6, " ")+ element.QPrice+ "<BR>";
+            });
+            orderInfo += "備註：<BR>";
+            orderInfo += "--------------------------------<BR>";
+            orderInfo += "折扣價："+this.planSelected+"<BR>";
+            orderInfo += "合計："+totalPrice+"元<BR>";
+            orderInfo += "--------------------------------<BR>";
+            orderInfo += "聯繫電話：63351773<BR>";
+            orderInfo += "訂餐時間："+currentDate+"<BR><BR>";
+            print(922560443, orderInfo)
+        },
+        formatStringLen(strVal, len, padChar){
+            padChar = padChar || " ";
+            if (!strVal) {
+                return padChar.repeat(len);
+            } else {
+                const strLen = strVal.length;
+                if (strLen > len){
+                return strVal.substring(0, len);
+                } else if (strLen < len){
+                return strVal.padEnd(len, padChar);
+                }else{
+                return strVal;
+                }
+            }
+        },
         getPrice(){
             var p = 0
             this.details.forEach(element => {
@@ -159,6 +213,9 @@ export default {
                             + currentdate.getSeconds();
             const currentDate = datetime;
             if(tprice >0){
+                
+                this.printer(tprice, currentDate)
+                this.printer(tprice, currentDate)
                 axios.post(this.$baseUrl+'Order/addOrder', {
                     "id": currentDate +"--"+ tprice+"--" +i,
                     "price": tprice,
@@ -167,7 +224,8 @@ export default {
                     // "createdDate": datetime,
                     "comment": "",
                     "customer": "adminOrder",
-                    "details": this.details
+                    "details": this.details,
+                    "promote": this.planSelected
                 })
                 .then(res => {
                     console.log(res.data)
@@ -207,6 +265,7 @@ export default {
                 tmp['Oid'] = "string",
                 tmp['QPrice'] = items.price,
                 tmp['Quantity'] = 1,
+                tmp['unitPrice'] = items.price,
                 tmp['Enable'] = true
                 
                 this.details.push(tmp) 

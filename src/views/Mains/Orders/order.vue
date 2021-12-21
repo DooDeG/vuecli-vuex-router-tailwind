@@ -21,7 +21,11 @@
                                 </label>
                                 <label class="flex items-center radio p-2 cursor-pointer">
                                     <input v-model="radioP"  class="my-auto transform scale-125" type="radio" id="allOrder" value="allOrder"/>
-                                    <div for="allOrder" class="title px-2">今日全部已处理訂單</div>
+                                    <div for="allOrder" class="title px-2">今日全部已處理訂單</div>
+                                </label>
+                                <label class="flex items-center radio p-2 cursor-pointer">
+                                    <input v-model="radioP"  class="my-auto transform scale-125" type="radio" id="allCancelOrder" value="allCancelOrder"/>
+                                    <div for="allCancelOrder" class="title px-2">今日全部已取消訂單</div>
                                 </label>
                                 <label class="flex items-center radio p-2 cursor-pointer">
                                     <input v-model="radioP"  class="my-auto transform scale-125" type="radio" id="all" value="all"/>
@@ -158,9 +162,26 @@ export default {
                 this.getAllOrder() 
             }else if(this.radioP == "allOrder"){
                 this.getAllTodayOrder()
+            }else if(this.radioP == "allCancelOrder"){
+                this.getTodayOrderCancel()
             }else{
                 this.getTodayOrder()
             }
+
+            
+        },
+        getTodayOrderCancel() {
+            this.order = [];
+            axios.get(this.$baseUrl+'Order/GetOrderByTodayCancel')
+                .then(res => {
+                    res.data.value.order.forEach(item => {
+                        this.order.push(item) 
+                    });
+                })
+                .catch(error => {
+                    console.log(error)
+                    // Manage errors if found any
+            })
         },
         getTodayOrder() {
             this.order = [];
