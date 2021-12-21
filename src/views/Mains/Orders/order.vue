@@ -21,11 +21,11 @@
                                 </label>
                                 <label class="flex items-center radio p-2 cursor-pointer">
                                     <input v-model="radioP"  class="my-auto transform scale-125" type="radio" id="allOrder" value="allOrder"/>
-                                    <div for="allOrder" class="title px-2">今日全部訂單</div>
+                                    <div for="allOrder" class="title px-2">今日全部已处理訂單</div>
                                 </label>
                                 <label class="flex items-center radio p-2 cursor-pointer">
                                     <input v-model="radioP"  class="my-auto transform scale-125" type="radio" id="all" value="all"/>
-                                    <div for="all" class="title px-2">全部未處理訂單</div>
+                                    <div for="all" class="title px-2">今日全部訂單</div>
                                 </label>
                             </div>
                             <!-- This is an example component -->

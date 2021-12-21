@@ -112,7 +112,6 @@
                 </div>
             </div>
         </main>
-        {{details}}
     </div>
 </template>
 
