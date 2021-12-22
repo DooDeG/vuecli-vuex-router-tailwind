@@ -85,9 +85,9 @@
                         <option value="買一送一">買一送一</option>
                         <option value="沒有優惠">沒有優惠</option>
                     </select>
-                    <button class="flex items-center justify-center ml-2 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+                    <!-- <button class="flex items-center justify-center ml-2 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
                         <span>Apply</span>
-                    </button>
+                    </button> -->
                 </form>
             </div>
             
@@ -201,7 +201,7 @@ export default {
             return p
         },
         postOrder(){
-            const tprice = this.getPrice()
+            var tprice = this.getPrice()
             const i = Math.ceil(Math.random()*100000)
             this.getPrice();
             var currentdate = new Date(); 
@@ -213,7 +213,13 @@ export default {
                             + currentdate.getSeconds();
             const currentDate = datetime;
             if(tprice >0){
-                
+                if(this.planSelected == "9折優惠"){
+                    tprice = tprice * 0.9
+                }else if(this.planSelected == "8折優惠"){
+                    tprice = tprice * 0.8
+                }else{
+                    tprice = tprice
+                }
                 this.printer(tprice, currentDate)
                 this.printer(tprice, currentDate)
                 axios.post(this.$baseUrl+'Order/addOrder', {
