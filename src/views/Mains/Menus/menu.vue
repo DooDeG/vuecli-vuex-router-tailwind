@@ -323,6 +323,8 @@ export default {
                             this.promoteExist = true
                         }
                     });
+                    this.menu = this.menu.sort((a, b)=> a.type.localeCompare(b.type, 'zh'));
+                    this.promoteMenu = this.promoteMenu.sort((a, b)=> a.message.localeCompare(b.message, 'zh'));
                 })
                 .catch(error => {
                     console.log(error)
