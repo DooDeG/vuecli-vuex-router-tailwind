@@ -133,18 +133,22 @@
                                         <tr class="">
                                             <th
                                                 class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                                id</th>
+                                                Id</th>
                                             <th
                                                 class=" px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                                <div class="flex justify-start">价格</div>
+                                                <div class="flex justify-start">價格</div>
                                                 </th>
                                             <th
                                                 class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                                <div class="flex justify-start">时间</div>
+                                                <div class="flex justify-start">時間</div>
                                                 </th>
                                             <th
                                                 class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                                <div class="flex justify-start">状态</div>
+                                                <div class="flex justify-start">優惠</div>
+                                                </th>
+                                            <th
+                                                class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                                <div class="flex justify-start">狀態</div>
                                                 </th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
                                         </tr>
@@ -175,7 +179,11 @@
                                                     class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{{item.createdDate}}</span>
                                                 </div>
                                             </td>
-    
+                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                <div class="flex justify-start">
+                                                    <div class="text-sm leading-5 text-gray-900">{{item.promote}}</div>
+                                                </div>
+                                            </td>
                                             <td
                                                 class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
                                                     <div class="flex justify-start">

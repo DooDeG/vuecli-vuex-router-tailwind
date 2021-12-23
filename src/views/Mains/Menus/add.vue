@@ -95,15 +95,7 @@ export default {
     components: {
     },
     mounted() {
-        axios.get("https://jsonplaceholder.typicode.com/users")
-        .then(res => {
-            this.usersList = res.data;
-            console.log(this.usersList)
-        })
-        .catch(error => {
-            console.log(error)
-            // Manage errors if found any
-        })
+        
     },
     created(){
         this.getTypeAll()
@@ -168,7 +160,7 @@ export default {
                 })
                 .then(res => {
                     console.log(res.data)
-                    this.$router.push('/mains');
+                    this.$router.push('/mains/menu');
                 })
                 .catch(error => {
                     console.log(error)

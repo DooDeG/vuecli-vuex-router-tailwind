@@ -337,14 +337,7 @@ export default {
     components: {
     },
     mounted() {
-        axios.get("https://jsonplaceholder.typicode.com/users")
-        .then(res => {
-            this.usersList = res.data;
-            console.log(this.usersList)
-        })
-        .catch(error => {
-            console.log(error)
-        })
+        
     },
     methods:{
         loginout () {

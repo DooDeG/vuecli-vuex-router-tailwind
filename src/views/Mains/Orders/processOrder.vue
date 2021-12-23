@@ -32,10 +32,31 @@
                                 </div>
                             </div>
                             <div class="px-5 pb-5">
-                                <input disabled :placeholder="item.product" class=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400">
                                 <div class="flex">
-                                    <div class="flex-grow w-1/4 pr-2"><input disabled :placeholder="item.quantity" class=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"></div>
-                                    <div class="flex-grow"><input disabled :placeholder="item.qPrice" class=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"></div>
+                                    <div class="flex-grow w-1/4 pr-2">
+                                    <div disabled
+                                    class="text-gray-600 text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent 
+                                    rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 
+                                    ring-offset-current ring-offset-2 ring-gray-400">
+                                        數量：{{item.quantity}}</div>
+                                    </div>
+                                    <div class="flex-grow "><div disabled class="text-gray-600 text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400">
+                                        單價: {{item.qPrice}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex">
+                                    <div class="flex-grow w-1/4 pr-2">
+                                    <div disabled
+                                    class="text-gray-600 text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent 
+                                    rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 
+                                    ring-offset-current ring-offset-2 ring-gray-400">
+                                        優惠：{{item.promoteProduct}}</div>
+                                    </div>
+                                    <div class="flex-grow "><div disabled class="text-gray-600 text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400">
+                                        總價: {{item.qPrice * item.quantity}}
+                                        </div>
+                                    </div>
                                 </div>
                                 
                             </div>

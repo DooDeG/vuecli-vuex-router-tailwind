@@ -79,11 +79,13 @@
             <div class="mt-8">
                 <form class="flex items-center justify-start">
                     <select v-model="planSelected">
-                        <option disabled value="">選擇優惠</option>
-                        <option value="9折優惠">9折優惠</option>
-                        <option value="8折優惠">8折優惠</option>
-                        <option value="買一送一">買一送一</option>
-                        <option value="沒有優惠">沒有優惠</option>
+                        <!-- <option disabled value="">選擇優惠</option>
+                        <option value="1. 隕石二號 10mop/杯">1. 隕石二號 10mop/杯</option>
+                        <option value="2. 隕石二號買一送一">2. 隕石二號買一送一</option>
+                        <option value="3. 經典系列第二杯半價(兩杯比較價高杯半價)">3. 經典系列第二杯半價(兩杯比較價高杯半價)</option>
+                        <option value="4. 購買隕石系列外的任何系列 + 1 mop 換購隕石系列一杯">4. 購買隕石系列外的任何系列 + 1 mop 換購隕石系列一杯</option> -->
+                        <option value="9折優惠">學生優惠(9折優惠)</option>
+                        <option value="">沒有優惠</option>
                     </select>
                     <!-- <button class="flex items-center justify-center ml-2 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
                         <span>Apply</span>
@@ -129,6 +131,40 @@
                     </div>
                 </div>
             </div>
+            <div v-show="promoteExist" class="container mx-auto px-6 mt-6">
+                <div class="flex justify-start">
+                    <div class="font-bold text-xl font-serif pl-5">優惠</div>
+                </div>
+                <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
+
+                    <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden border-t-4" 
+                        v-for="item in promoteMenu" :value="item" :key="item.id">
+                        <!-- <div class="flex items-end justify-end h-56 w-full bg-cover" style="background-image: url('https://images.unsplash.com/photo-1495856458515-0637185db551?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80')">
+                            <button class="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
+                                    @click="addShoppingCart(item)">
+                                <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            </button>
+                        </div> -->
+                        <div class="flex justify-around  w-full bg-cover">
+                            <div class="px-5 py-3">
+                                <h3 class="text-gray-700 uppercase">{{item.name}}</h3>
+                                <div class="mt-1 flex justify-between">
+                                    <span
+                                        class="px-2 pt-1 inline-flex text-xs leading-5 font-semibold rounded-full 
+                                        bg-green-100 text-green-800">{{item.message}}</span>
+                                    <span class="text-gray-500 mt-2">${{item.price}}</span>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                            <button class="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
+                                    @click="addShoppingCart(item)">
+                                <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 </template>
@@ -142,6 +178,8 @@ export default {
     data() {
         return {
             menu: [],
+            promoteMenu: [],
+            promoteExist: false,
             cartOpen: false,
             isOpen: false,
             orderList:[],
@@ -272,6 +310,7 @@ export default {
                 tmp['QPrice'] = items.price,
                 tmp['Quantity'] = 1,
                 tmp['unitPrice'] = items.price,
+                tmp['PromoteProduct'] = items.message,
                 tmp['Enable'] = true
                 
                 this.details.push(tmp) 
@@ -330,7 +369,12 @@ export default {
             axios.get(this.$baseUrl+'Product/getAll')
                 .then(res => {
                     res.data.value.products.forEach(item => {
-                        this.menu.push(item) 
+                        if(item.type != "優惠"){
+                            this.menu.push(item) 
+                        }else{
+                            this.promoteMenu.push(item)
+                            this.promoteExist = true
+                        }
                     });
                 })
                 .catch(error => {

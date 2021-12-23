@@ -172,7 +172,7 @@ export default {
                 })
                 .then(res => {
                     console.log(res.data)
-                    this.$router.push('/mains');
+                    this.$router.push('/mains/menu');
                 })
                 .catch(error => {
                     console.log(error)
@@ -195,7 +195,7 @@ export default {
         },
         cancelButton(){
             alert("data not save");
-            this.$router.push('/mains');
+            this.$router.push('/mains/menu');
         }
     }
 }
