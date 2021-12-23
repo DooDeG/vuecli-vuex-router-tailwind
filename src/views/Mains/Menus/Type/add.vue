@@ -55,7 +55,7 @@ export default {
             this.getData();
             if(this.typeError == false){
                 axios.post(this.$baseUrl+'Type/createType', {
-                    "type": "优惠计划",
+                    "type": this.typeName,
                     "enable": true
                 })
                 .then(res => {
